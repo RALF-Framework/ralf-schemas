@@ -1,0 +1,21 @@
+{
+  "name": "@ralf-framework/schemas",
+  "version": "0.1.0",
+  "private": false,
+  "description": "JSON Schemas for the RALF Framework.",
+  "type": "module",
+  "files": [
+    "schemas/",
+    "examples/",
+    "docs/"
+  ],
+  "scripts": {
+    "validate": "node tools/validate.mjs",
+    "validate:python": "python tools/validate-all.py"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "yaml": "^2.7.0"
+  }
+}

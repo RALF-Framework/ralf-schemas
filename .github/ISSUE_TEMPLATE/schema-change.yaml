@@ -1,0 +1,29 @@
+name: Schema change
+about: Propose a change to a RALF schema
+title: "Schema: "
+labels: [schema]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What cannot currently be represented or validated?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed schema change
+      description: Include field names, examples, and compatibility impact.
+    validations:
+      required: true
+  - type: dropdown
+    id: compatibility
+    attributes:
+      label: Compatibility impact
+      options:
+        - non-breaking
+        - breaking
+        - unknown
+    validations:
+      required: true

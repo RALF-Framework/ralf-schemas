@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ralf-framework.org/draft/2020-12/ralf-domain-pack.schema.json",
+  "title": "RALF Domain Pack",
+  "description": "A reusable bundle of domain-specific lifecycle, role, artifact, policy, and knowledge definitions.",
+  "type": "object",
+  "required": [
+    "kind",
+    "id",
+    "name",
+    "version",
+    "scope"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "ralf-domain-pack"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "name": {
+      "$ref": "common.schema.json#/$defs/non_empty_string"
+    },
+    "version": {
+      "$ref": "common.schema.json#/$defs/version"
+    },
+    "ralf_spec_version": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "common.schema.json#/$defs/scope"
+    },
+    "depends_on": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/domain_pack_dependency"
+      }
+    },
+    "terminology": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/term_definition"
+      }
+    },
+    "lifecycles": {
+      "type": "array",
+      "items": {
+        "$ref": "ralf-lifecycle.schema.json"
+      }
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "$ref": "ralf-role.schema.json"
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "ralf-artifact.schema.json"
+      }
+    },
+    "policies": {
+      "type": "array",
+      "items": {
+        "$ref": "ralf-policy.schema.json"
+      }
+    },
+    "knowledge_assets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/knowledge_asset"
+      }
+    },
+    "reference_standards": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/external_reference"
+      }
+    },
+    "metadata": {
+      "$ref": "common.schema.json#/$defs/metadata"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extension_object"
+    }
+  },
+  "$defs": {
+    "domain_pack_dependency": {
+      "type": "object",
+      "required": [
+        "id",
+        "version_range"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "version_range": {
+          "type": "string"
+        }
+      }
+    },
+    "term_definition": {
+      "type": "object",
+      "required": [
+        "term",
+        "definition"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "term": {
+          "$ref": "common.schema.json#/$defs/non_empty_string"
+        },
+        "definition": {
+          "$ref": "common.schema.json#/$defs/non_empty_string"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "knowledge_asset": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "name": {
+          "$ref": "common.schema.json#/$defs/non_empty_string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "procedure",
+            "standard",
+            "checklist",
+            "guide",
+            "dataset",
+            "model",
+            "taxonomy",
+            "other"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "$ref": "common.schema.json#/$defs/uri"
+        },
+        "owner_role": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        }
+      }
+    }
+  }
+}

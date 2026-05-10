@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ralf-framework.org/draft/2020-12/ralf-project.schema.json",
+  "title": "RALF Project",
+  "description": "A complete RALF model for an organization, team, workflow, domain, or system boundary.",
+  "type": "object",
+  "required": [
+    "kind",
+    "ralf_schema_version",
+    "ralf_spec_version",
+    "id",
+    "name",
+    "scope",
+    "lifecycles",
+    "roles",
+    "artifacts"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "ralf-project"
+    },
+    "ralf_schema_version": {
+      "$ref": "common.schema.json#/$defs/version"
+    },
+    "ralf_spec_version": {
+      "type": "string"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "name": {
+      "$ref": "common.schema.json#/$defs/non_empty_string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "common.schema.json#/$defs/scope"
+    },
+    "domain_packs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/domain_pack_ref"
+      }
+    },
+    "lifecycles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "ralf-lifecycle.schema.json"
+      }
+    },
+    "roles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "ralf-role.schema.json"
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "ralf-artifact.schema.json"
+      }
+    },
+    "policies": {
+      "type": "array",
+      "items": {
+        "$ref": "ralf-policy.schema.json"
+      }
+    },
+    "governance": {
+      "$ref": "#/$defs/governance"
+    },
+    "metadata": {
+      "$ref": "common.schema.json#/$defs/metadata"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extension_object"
+    }
+  },
+  "$defs": {
+    "domain_pack_ref": {
+      "type": "object",
+      "required": [
+        "id",
+        "version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "version": {
+          "$ref": "common.schema.json#/$defs/version"
+        },
+        "source": {
+          "type": "string"
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "decision_model": {
+          "type": "string"
+        },
+        "risk_management_model": {
+          "type": "string"
+        },
+        "default_confidentiality": {
+          "$ref": "common.schema.json#/$defs/confidentiality"
+        },
+        "approval_required_for_ai_execution": {
+          "type": "boolean"
+        },
+        "provenance_required": {
+          "type": "boolean"
+        },
+        "policies": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

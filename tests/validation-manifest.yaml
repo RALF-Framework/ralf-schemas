@@ -1,0 +1,12 @@
+valid:
+  - file: examples/valid/project.ralf.yaml
+    schema: schemas/draft/2020-12/ralf-project.schema.json
+  - file: examples/valid/domain-pack.ralf.yaml
+    schema: schemas/draft/2020-12/ralf-domain-pack.schema.json
+  - file: examples/valid/context-packet.ralf.yaml
+    schema: schemas/draft/2020-12/ralf-context-packet.schema.json
+  - file: examples/valid/conformance-manifest.ralf.yaml
+    schema: schemas/draft/2020-12/ralf-conformance-manifest.schema.json
+invalid:
+  - file: examples/invalid/project-missing-roles-and-artifacts.ralf.yaml
+    schema: schemas/draft/2020-12/ralf-project.schema.json

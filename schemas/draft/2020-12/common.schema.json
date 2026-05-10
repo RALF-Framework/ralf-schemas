@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ralf-framework.org/draft/2020-12/common.schema.json",
+  "title": "RALF Common Definitions",
+  "description": "Reusable definitions shared by RALF JSON Schemas.",
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "description": "A stable, URL-safe RALF identifier using lowercase kebab-case.",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "version": {
+      "type": "string",
+      "description": "A semantic version or pre-1.0 draft version string.",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "non_empty_string": {
+      "type": "string",
+      "minLength": 1
+    },
+    "uri": {
+      "type": "string",
+      "format": "uri"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "tag_list": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/identifier"
+      },
+      "uniqueItems": true
+    },
+    "scope": {
+      "type": "object",
+      "description": "The boundary of a project, domain pack, context packet, or other RALF object.",
+      "required": [
+        "includes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "includes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/non_empty_string"
+          }
+        },
+        "excludes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/non_empty_string"
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/non_empty_string"
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/non_empty_string"
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "created_by": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "created_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "updated_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "source": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "license": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "tags": {
+          "$ref": "#/$defs/tag_list"
+        }
+      }
+    },
+    "external_reference": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "url": {
+          "$ref": "#/$defs/uri"
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "extension_object": {
+      "type": "object",
+      "description": "Reserved extension namespace. Extension keys should be vendor- or domain-prefixed.",
+      "propertyNames": {
+        "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+      },
+      "additionalProperties": true
+    },
+    "confidentiality": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    },
+    "participant_type": {
+      "type": "string",
+      "enum": [
+        "human",
+        "team",
+        "software-system",
+        "ai-system",
+        "mixed"
+      ]
+    },
+    "decision_right": {
+      "type": "string",
+      "enum": [
+        "analyze",
+        "recommend",
+        "draft",
+        "execute",
+        "approve",
+        "reject",
+        "publish",
+        "administer"
+      ]
+    },
+    "recipient_authority": {
+      "type": "string",
+      "enum": [
+        "analysis-only",
+        "recommend",
+        "draft",
+        "execute-with-approval",
+        "execute-autonomously",
+        "approve"
+      ]
+    },
+    "enforcement_level": {
+      "type": "string",
+      "enum": [
+        "advisory",
+        "warning",
+        "blocking",
+        "manual-review-required"
+      ]
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+    "conformance_level": {
+      "type": "string",
+      "enum": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L4"
+      ]
+    }
+  }
+}

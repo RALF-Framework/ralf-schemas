@@ -1,0 +1,33 @@
+kind: ralf-domain-pack
+id: software-development-basic
+name: Software Development Basic Domain Pack
+version: 0.1.0
+ralf_spec_version: 0.1-draft
+scope:
+  includes:
+    - Basic software delivery terminology, roles, artifacts, policies, and lifecycle patterns.
+  excludes:
+    - Regulated safety-critical software development.
+terminology:
+  - term: release readiness
+    definition: The state where required evidence exists and a release decision can be made.
+roles:
+  - id: software-engineer
+    name: Software Engineer
+    performer_types: [human, ai-system]
+    responsibilities:
+      - Implement approved changes.
+    decision_rights: [draft, execute]
+artifacts:
+  - id: release-notes
+    name: Release Notes
+    artifact_type: document
+    confidentiality: public
+policies:
+  - id: human-release-approval
+    name: Human Release Approval
+    enforcement_level: blocking
+reference_standards:
+  - name: BPMN 2.0
+    url: https://www.omg.org/spec/BPMN/2.0/
+    notes: Used as a reference for process and lifecycle modeling concepts.

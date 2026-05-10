@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ralf-framework.org/draft/2020-12/ralf-artifact.schema.json",
+  "title": "RALF Artifact",
+  "description": "A work product, evidence object, document, data object, model, decision, or record.",
+  "type": "object",
+  "required": [
+    "id",
+    "name"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "name": {
+      "$ref": "common.schema.json#/$defs/non_empty_string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "artifact_type": {
+      "type": "string",
+      "enum": [
+        "document",
+        "data-object",
+        "model",
+        "decision",
+        "record",
+        "evidence",
+        "code",
+        "configuration",
+        "other"
+      ]
+    },
+    "format": {
+      "type": "string"
+    },
+    "confidentiality": {
+      "$ref": "common.schema.json#/$defs/confidentiality"
+    },
+    "owner_role": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "retention_rule": {
+      "type": "string"
+    },
+    "metadata": {
+      "$ref": "common.schema.json#/$defs/metadata"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extension_object"
+    }
+  }
+}

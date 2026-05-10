@@ -1,0 +1,12 @@
+[project]
+name = "ralf-schemas"
+version = "0.1.0"
+description = "JSON Schemas and validation fixtures for the RALF Framework."
+requires-python = ">=3.10"
+dependencies = [
+  "jsonschema>=4.0.0",
+  "PyYAML>=6.0.0"
+]
+
+[tool.ruff]
+line-length = 100

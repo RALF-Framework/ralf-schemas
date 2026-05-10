@@ -1,0 +1,14 @@
+kind: ralf-project
+ralf_schema_version: 0.1.0
+ralf_spec_version: 0.1-draft
+id: invalid-project
+name: Invalid Project
+scope:
+  includes:
+    - This intentionally fails because roles and artifacts are missing.
+lifecycles:
+  - id: delivery-lifecycle
+    name: Delivery Lifecycle
+    phases:
+      - id: discovery
+        name: Discovery

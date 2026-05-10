@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ralf-framework.org/draft/2020-12/ralf-role.schema.json",
+  "title": "RALF Role",
+  "description": "A defined responsibility set assigned to humans, teams, systems, or AI participants.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "responsibilities"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "name": {
+      "$ref": "common.schema.json#/$defs/non_empty_string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "performer_types": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "common.schema.json#/$defs/participant_type"
+      }
+    },
+    "responsibilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "common.schema.json#/$defs/non_empty_string"
+      }
+    },
+    "decision_rights": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "common.schema.json#/$defs/decision_right"
+      }
+    },
+    "authority_limits": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/non_empty_string"
+      }
+    },
+    "required_skills": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/non_empty_string"
+      }
+    },
+    "interfaces_with": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "uniqueItems": true
+    },
+    "metadata": {
+      "$ref": "common.schema.json#/$defs/metadata"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extension_object"
+    }
+  }
+}

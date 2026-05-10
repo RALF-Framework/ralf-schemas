@@ -1,0 +1,91 @@
+kind: ralf-project
+ralf_schema_version: 0.1.0
+ralf_spec_version: 0.1-draft
+id: software-development-basic
+name: Software Development Basic
+scope:
+  includes:
+    - Small product software delivery lifecycle
+  excludes:
+    - Enterprise portfolio management
+    - Production infrastructure operations
+lifecycles:
+  - id: delivery-lifecycle
+    name: Delivery Lifecycle
+    phases:
+      - id: discovery
+        name: Discovery
+        responsible_roles: [product-owner]
+        expected_outputs: [problem-statement]
+      - id: implementation
+        name: Implementation
+        responsible_roles: [software-engineer]
+        expected_inputs: [problem-statement]
+        expected_outputs: [code-change]
+      - id: release
+        name: Release
+        responsible_roles: [release-manager]
+        expected_inputs: [code-change]
+        expected_outputs: [release-notes]
+    transitions:
+      - from: discovery
+        to: implementation
+        gate: discovery-approval
+      - from: implementation
+        to: release
+        gate: release-readiness
+    gates:
+      - id: discovery-approval
+        name: Discovery Approval
+        type: approval
+        decision_owner_role: product-owner
+        required_artifacts: [problem-statement]
+      - id: release-readiness
+        name: Release Readiness
+        type: release-decision
+        decision_owner_role: release-manager
+        required_artifacts: [code-change, release-notes]
+roles:
+  - id: product-owner
+    name: Product Owner
+    performer_types: [human]
+    responsibilities:
+      - Own product intent and acceptance criteria.
+    decision_rights: [approve, reject]
+  - id: software-engineer
+    name: Software Engineer
+    performer_types: [human, ai-system]
+    responsibilities:
+      - Implement changes within approved scope.
+    decision_rights: [draft, execute]
+    authority_limits:
+      - Cannot approve release gates.
+  - id: release-manager
+    name: Release Manager
+    performer_types: [human]
+    responsibilities:
+      - Decide release readiness.
+    decision_rights: [approve, publish]
+artifacts:
+  - id: problem-statement
+    name: Problem Statement
+    artifact_type: document
+    confidentiality: internal
+  - id: code-change
+    name: Code Change
+    artifact_type: code
+    confidentiality: internal
+  - id: release-notes
+    name: Release Notes
+    artifact_type: document
+    confidentiality: public
+policies:
+  - id: human-release-approval
+    name: Human Release Approval
+    enforcement_level: blocking
+    applies_to: [release-readiness]
+    owner_role: release-manager
+governance:
+  default_confidentiality: internal
+  approval_required_for_ai_execution: true
+  provenance_required: true

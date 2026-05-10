@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: RALF Schemas
+message: "If you use these schemas, please cite the RALF Framework."
+type: software
+authors:
+  - name: RALF Framework Contributors
+version: 0.1.0
+repository-code: https://github.com/RALF-framework/ralf-schemas
+license: LicenseRef-Pending

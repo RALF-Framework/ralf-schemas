@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ralf-framework.org/draft/2020-12/ralf-conformance-manifest.schema.json",
+  "title": "RALF Conformance Manifest",
+  "description": "A machine-readable statement of RALF compatibility for tools, schemas, domain packs, context packets, or implementations.",
+  "type": "object",
+  "required": [
+    "kind",
+    "id",
+    "target_type",
+    "conformance_level",
+    "ralf_spec_version",
+    "schema_version"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "ralf-conformance-manifest"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "target_type": {
+      "type": "string",
+      "enum": [
+        "tool",
+        "schema",
+        "domain-pack",
+        "context-packet",
+        "runtime-adapter",
+        "documentation",
+        "studio",
+        "importer",
+        "exporter"
+      ]
+    },
+    "conformance_level": {
+      "$ref": "common.schema.json#/$defs/conformance_level"
+    },
+    "ralf_spec_version": {
+      "type": "string"
+    },
+    "schema_version": {
+      "$ref": "common.schema.json#/$defs/version"
+    },
+    "supported_extensions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "unsupported_features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "known_limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "validated_at": {
+          "$ref": "common.schema.json#/$defs/timestamp"
+        },
+        "validator": {
+          "type": "string"
+        },
+        "result": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "partial"
+          ]
+        }
+      }
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extension_object"
+    }
+  }
+}

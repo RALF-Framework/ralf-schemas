@@ -1,0 +1,331 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ralf-framework.org/draft/2020-12/ralf-context-packet.schema.json",
+  "title": "RALF Context Packet",
+  "description": "A portable task-specific bundle of relevant RALF context.",
+  "type": "object",
+  "required": [
+    "kind",
+    "id",
+    "ralf_schema_version",
+    "ralf_spec_version",
+    "task",
+    "scope",
+    "roles",
+    "artifacts",
+    "constraints",
+    "decision_rights"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "ralf-context-packet"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "ralf_schema_version": {
+      "$ref": "common.schema.json#/$defs/version"
+    },
+    "ralf_spec_version": {
+      "type": "string"
+    },
+    "source_project": {
+      "$ref": "#/$defs/source_project"
+    },
+    "domain_packs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/domain_pack_ref"
+      }
+    },
+    "task": {
+      "$ref": "#/$defs/task"
+    },
+    "scope": {
+      "$ref": "common.schema.json#/$defs/scope"
+    },
+    "roles": {
+      "$ref": "#/$defs/raci_roles"
+    },
+    "artifacts": {
+      "$ref": "#/$defs/context_artifacts"
+    },
+    "constraints": {
+      "$ref": "#/$defs/constraints"
+    },
+    "decision_rights": {
+      "$ref": "#/$defs/context_decision_rights"
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/risk"
+      }
+    },
+    "expected_output": {
+      "$ref": "#/$defs/expected_output"
+    },
+    "valid_until": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "provenance": {
+      "$ref": "#/$defs/provenance"
+    },
+    "metadata": {
+      "$ref": "common.schema.json#/$defs/metadata"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extension_object"
+    }
+  },
+  "$defs": {
+    "source_project": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "version": {
+          "type": "string"
+        },
+        "uri": {
+          "$ref": "common.schema.json#/$defs/uri"
+        }
+      }
+    },
+    "domain_pack_ref": {
+      "type": "object",
+      "required": [
+        "id",
+        "version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "version": {
+          "$ref": "common.schema.json#/$defs/version"
+        }
+      }
+    },
+    "task": {
+      "type": "object",
+      "required": [
+        "goal"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "goal": {
+          "$ref": "common.schema.json#/$defs/non_empty_string"
+        },
+        "lifecycle": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "lifecycle_phase": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "responsible_role": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "input_assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "success_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "raci_roles": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "responsible": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "accountable": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "consulted": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "uniqueItems": true
+        },
+        "informed": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "context_artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "uniqueItems": true
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "uniqueItems": true
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "policies": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "uniqueItems": true
+        },
+        "prohibited_actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "allowed_actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "confidentiality": {
+          "$ref": "common.schema.json#/$defs/confidentiality"
+        },
+        "tool_use": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "context_decision_rights": {
+      "type": "object",
+      "required": [
+        "recipient_authority"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "recipient_authority": {
+          "$ref": "common.schema.json#/$defs/recipient_authority"
+        },
+        "approval_required": {
+          "type": "boolean"
+        },
+        "approval_role": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "required": [
+        "id",
+        "level",
+        "description"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "level": {
+          "$ref": "common.schema.json#/$defs/risk_level"
+        },
+        "description": {
+          "type": "string"
+        },
+        "mitigation": {
+          "type": "string"
+        }
+      }
+    },
+    "expected_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string"
+        },
+        "schema_ref": {
+          "type": "string"
+        },
+        "acceptance_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "created_by": {
+          "type": "string"
+        },
+        "created_at": {
+          "$ref": "common.schema.json#/$defs/timestamp"
+        },
+        "source_artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "uniqueItems": true
+        },
+        "transformations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

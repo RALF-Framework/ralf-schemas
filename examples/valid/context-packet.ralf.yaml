@@ -1,0 +1,48 @@
+kind: ralf-context-packet
+id: cp-review-release-notes-001
+ralf_schema_version: 0.1.0
+ralf_spec_version: 0.1-draft
+source_project:
+  id: software-development-basic
+domain_packs:
+  - id: software-development-basic
+    version: 0.1.0
+task:
+  goal: Review release notes for completeness before publication.
+  lifecycle: delivery-lifecycle
+  lifecycle_phase: release
+  responsible_role: software-engineer
+  success_criteria:
+    - Missing changes are identified.
+    - Risky wording is flagged for human review.
+scope:
+  includes:
+    - Release notes draft
+    - Linked changelog
+  excludes:
+    - Approving production deployment
+roles:
+  responsible: software-engineer
+  accountable: release-manager
+  consulted: [product-owner]
+artifacts:
+  inputs: [release-notes]
+  outputs: [release-notes]
+constraints:
+  policies: [human-release-approval]
+  prohibited_actions:
+    - approve-release
+    - publish-to-production
+  confidentiality: internal
+decision_rights:
+  recipient_authority: recommend
+  approval_required: true
+  approval_role: release-manager
+expected_output:
+  type: review-comments
+  format: markdown
+valid_until: '2026-12-31T23:59:59Z'
+provenance:
+  created_by: ralf-cli
+  created_at: '2026-05-10T10:00:00Z'
+  source_artifacts: [release-notes]

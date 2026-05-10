@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ralf-framework.org/draft/2020-12/ralf-policy.schema.json",
+  "title": "RALF Policy",
+  "description": "A rule, constraint, or requirement that affects work execution.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "enforcement_level"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "name": {
+      "$ref": "common.schema.json#/$defs/non_empty_string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "enforcement_level": {
+      "$ref": "common.schema.json#/$defs/enforcement_level"
+    },
+    "applies_to": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "uniqueItems": true
+    },
+    "owner_role": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "exception_process": {
+      "type": "string"
+    },
+    "reference_standards": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/external_reference"
+      }
+    },
+    "metadata": {
+      "$ref": "common.schema.json#/$defs/metadata"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extension_object"
+    }
+  }
+}

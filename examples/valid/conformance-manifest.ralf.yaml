@@ -1,0 +1,14 @@
+kind: ralf-conformance-manifest
+id: ralf-cli-conformance
+schema_version: 0.1.0
+ralf_spec_version: 0.1-draft
+target_type: tool
+conformance_level: L1
+supported_extensions: []
+unsupported_features:
+  - semantic cross-reference validation
+known_limitations:
+  - This draft only validates document structure.
+validation:
+  validator: ralf-schemas/tools/validate.py
+  result: pass
