@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ralf-framework.org/draft/2020-12/ralf-approval-rule.schema.json",
+  "title": "RALF Approval Rule",
+  "description": "A rule that defines when human review, approval, rejection, or escalation is required.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "approving_role"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "name": {
+      "$ref": "common.schema.json#/$defs/non_empty_string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "trigger": {
+      "$ref": "#/$defs/trigger"
+    },
+    "approving_role": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "required_evidence": {
+      "$ref": "common.schema.json#/$defs/identifier_list"
+    },
+    "decision_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "validity_period": {
+      "type": "string"
+    },
+    "escalation_role": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "audit_record_required": {
+      "type": "boolean"
+    },
+    "metadata": {
+      "$ref": "common.schema.json#/$defs/metadata"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extension_object"
+    }
+  },
+  "$defs": {
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "risk_level": {
+          "$ref": "common.schema.json#/$defs/risk_level"
+        },
+        "action": {
+          "type": "string"
+        },
+        "lifecycle_phase": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "tool": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "artifact": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        }
+      }
+    }
+  }
+}

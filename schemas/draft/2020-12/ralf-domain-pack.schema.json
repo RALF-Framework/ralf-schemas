@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.ralf-framework.org/draft/2020-12/ralf-domain-pack.schema.json",
   "title": "RALF Domain Pack",
-  "description": "A reusable bundle of domain-specific lifecycle, role, artifact, policy, and knowledge definitions.",
+  "description": "A reusable bundle of domain-specific lifecycle, role, artifact, policy, governance, and knowledge definitions.",
   "type": "object",
   "required": [
     "kind",
@@ -68,6 +68,12 @@
       "type": "array",
       "items": {
         "$ref": "ralf-policy.schema.json"
+      }
+    },
+    "governance_profiles": {
+      "type": "array",
+      "items": {
+        "$ref": "ralf-governance-profile.schema.json"
       }
     },
     "knowledge_assets": {
@@ -153,6 +159,8 @@
             "dataset",
             "model",
             "taxonomy",
+            "policy",
+            "regulatory-reference",
             "other"
           ]
         },

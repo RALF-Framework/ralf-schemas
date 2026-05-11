@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ralf-framework.org/draft/2020-12/ralf-runtime-enforcement.schema.json",
+  "title": "RALF Runtime Enforcement",
+  "description": "Runtime enforcement expectations for tool calls, artifact writes, memory access, external communication, and other actions.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "tool_calls": {
+      "$ref": "common.schema.json#/$defs/runtime_enforcement_mode"
+    },
+    "artifact_writes": {
+      "$ref": "common.schema.json#/$defs/runtime_enforcement_mode"
+    },
+    "memory_access": {
+      "$ref": "common.schema.json#/$defs/runtime_enforcement_mode"
+    },
+    "data_access": {
+      "$ref": "common.schema.json#/$defs/runtime_enforcement_mode"
+    },
+    "external_communication": {
+      "$ref": "common.schema.json#/$defs/runtime_enforcement_mode"
+    },
+    "production_actions": {
+      "$ref": "common.schema.json#/$defs/runtime_enforcement_mode"
+    },
+    "inter_agent_messages": {
+      "$ref": "common.schema.json#/$defs/runtime_enforcement_mode"
+    },
+    "deployment_actions": {
+      "$ref": "common.schema.json#/$defs/runtime_enforcement_mode"
+    },
+    "default_outcome": {
+      "$ref": "common.schema.json#/$defs/enforcement_outcome"
+    },
+    "unsupported_features": {
+      "$ref": "common.schema.json#/$defs/string_list"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extension_object"
+    }
+  }
+}

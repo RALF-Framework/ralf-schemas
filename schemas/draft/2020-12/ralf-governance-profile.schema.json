@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ralf-framework.org/draft/2020-12/ralf-governance-profile.schema.json",
+  "title": "RALF Governance Profile",
+  "description": "A versioned set of policies, controls, risks, approval rules, evidence requirements, and runtime enforcement expectations.",
+  "type": "object",
+  "required": [
+    "kind",
+    "id",
+    "name",
+    "version",
+    "scope",
+    "owner_role"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "ralf-governance-profile"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "name": {
+      "$ref": "common.schema.json#/$defs/non_empty_string"
+    },
+    "version": {
+      "$ref": "common.schema.json#/$defs/version"
+    },
+    "description": {
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "common.schema.json#/$defs/scope"
+    },
+    "owner_role": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "review_cycle": {
+      "type": "string"
+    },
+    "referenced_standards": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/external_reference"
+      }
+    },
+    "policies": {
+      "type": "array",
+      "items": {
+        "$ref": "ralf-policy.schema.json"
+      }
+    },
+    "controls": {
+      "type": "array",
+      "items": {
+        "$ref": "ralf-control.schema.json"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/risk"
+      }
+    },
+    "approval_rules": {
+      "type": "array",
+      "items": {
+        "$ref": "ralf-approval-rule.schema.json"
+      }
+    },
+    "evidence_requirements": {
+      "type": "array",
+      "items": {
+        "$ref": "ralf-evidence-requirement.schema.json"
+      }
+    },
+    "runtime_enforcement": {
+      "$ref": "ralf-runtime-enforcement.schema.json"
+    },
+    "exception_process": {
+      "type": "string"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "compliance_note": {
+      "type": "string"
+    },
+    "metadata": {
+      "$ref": "common.schema.json#/$defs/metadata"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extension_object"
+    }
+  },
+  "$defs": {
+    "risk": {
+      "type": "object",
+      "required": [
+        "id",
+        "level",
+        "description"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "level": {
+          "$ref": "common.schema.json#/$defs/risk_level"
+        },
+        "severity": {
+          "$ref": "common.schema.json#/$defs/risk_severity"
+        },
+        "likelihood": {
+          "$ref": "common.schema.json#/$defs/risk_likelihood"
+        },
+        "description": {
+          "type": "string"
+        },
+        "affected_lifecycle_phases": {
+          "$ref": "common.schema.json#/$defs/identifier_list"
+        },
+        "affected_roles": {
+          "$ref": "common.schema.json#/$defs/identifier_list"
+        },
+        "mitigation": {
+          "type": "string"
+        },
+        "review_owner_role": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        }
+      }
+    }
+  }
+}

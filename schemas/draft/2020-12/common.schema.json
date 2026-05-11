@@ -112,6 +112,18 @@
         },
         "notes": {
           "type": "string"
+        },
+        "relationship": {
+          "type": "string",
+          "enum": [
+            "reference",
+            "inspiration",
+            "alignment",
+            "requirement-source",
+            "legal-reference",
+            "internal-policy",
+            "other"
+          ]
         }
       }
     },
@@ -175,7 +187,46 @@
         "manual-review-required"
       ]
     },
+    "enforcement_outcome": {
+      "type": "string",
+      "enum": [
+        "allow",
+        "deny",
+        "warn",
+        "require-approval",
+        "record-only"
+      ]
+    },
+    "runtime_enforcement_mode": {
+      "type": "string",
+      "enum": [
+        "not-applicable",
+        "record-only",
+        "policy-checked",
+        "approval-required",
+        "blocked"
+      ]
+    },
     "risk_level": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+    "risk_likelihood": {
+      "type": "string",
+      "enum": [
+        "rare",
+        "unlikely",
+        "possible",
+        "likely",
+        "almost-certain"
+      ]
+    },
+    "risk_severity": {
       "type": "string",
       "enum": [
         "low",
@@ -193,6 +244,20 @@
         "L3",
         "L4"
       ]
+    },
+    "identifier_list": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/identifier"
+      },
+      "uniqueItems": true
+    },
+    "string_list": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
     }
   }
 }

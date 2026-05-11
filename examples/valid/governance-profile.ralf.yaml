@@ -1,0 +1,72 @@
+kind: ralf-governance-profile
+id: software-release-governance
+name: Software Release Governance
+version: 0.1.0
+description: Basic governance profile for a software release workflow.
+scope:
+  includes:
+    - software release workflow
+    - customer-facing release artifacts
+  excludes:
+    - legal certification
+owner_role: release-manager
+review_cycle: quarterly
+referenced_standards:
+  - name: NIST AI Risk Management Framework
+    url: https://www.nist.gov/itl/ai-risk-management-framework
+    relationship: alignment
+policies:
+  - id: release-communication-policy
+    name: Release Communication Policy
+    enforcement_level: manual-review-required
+    description: Customer-facing release communication must be reviewed before publication.
+    owner_role: release-manager
+controls:
+  - id: release-review
+    name: Release Review
+    enforcement_level: manual-review-required
+    implementation: hybrid
+    applies_to:
+      lifecycle_phases:
+        - release
+      actions:
+        - publish-release-notes
+        - deploy-to-production
+    required_evidence:
+      - review-record
+    review_owner_role: release-manager
+risks:
+  - id: incorrect-release-information
+    level: medium
+    severity: medium
+    likelihood: possible
+    description: Release notes may misrepresent delivered changes.
+    mitigation: Require human review before publication.
+    review_owner_role: release-manager
+approval_rules:
+  - id: production-release-approval
+    name: Production Release Approval
+    trigger:
+      action: deploy-to-production
+      risk_level: high
+    approving_role: release-manager
+    required_evidence:
+      - review-record
+      - test-report
+    audit_record_required: true
+evidence_requirements:
+  - id: review-record
+    name: Review Record
+    evidence_type: approval-record
+    responsible_role: reviewer
+    required_for_controls:
+      - release-review
+    review_required: true
+    review_role: release-manager
+    provenance_required: true
+runtime_enforcement:
+  tool_calls: policy-checked
+  artifact_writes: policy-checked
+  production_actions: approval-required
+  default_outcome: require-approval
+compliance_note: This governance profile structures review and evidence. It does not prove legal or regulatory compliance.

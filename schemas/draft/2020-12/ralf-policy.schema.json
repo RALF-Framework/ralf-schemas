@@ -20,6 +20,9 @@
     "description": {
       "type": "string"
     },
+    "rule": {
+      "type": "string"
+    },
     "enforcement_level": {
       "$ref": "common.schema.json#/$defs/enforcement_level"
     },
@@ -30,8 +33,20 @@
       },
       "uniqueItems": true
     },
+    "applicable_roles": {
+      "$ref": "common.schema.json#/$defs/identifier_list"
+    },
+    "applicable_lifecycle_phases": {
+      "$ref": "common.schema.json#/$defs/identifier_list"
+    },
     "owner_role": {
       "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "required_evidence": {
+      "$ref": "common.schema.json#/$defs/identifier_list"
+    },
+    "related_controls": {
+      "$ref": "common.schema.json#/$defs/identifier_list"
     },
     "exception_process": {
       "type": "string"

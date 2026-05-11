@@ -1,0 +1,78 @@
+kind: ralf-context-packet
+id: cp-release-notes-review-001
+ralf_schema_version: 0.1.0
+ralf_spec_version: draft-0.x
+source_project:
+  id: software-development-basic
+task:
+  goal: Review release notes for completeness before publication.
+  lifecycle: software-delivery
+  lifecycle_phase: release
+  responsible_role: technical-writer
+scope:
+  includes:
+    - release notes draft
+    - linked changelog
+  excludes:
+    - approving production deployment
+roles:
+  responsible: technical-writer
+  accountable: release-manager
+  consulted:
+    - reviewer
+artifacts:
+  inputs:
+    - release-notes-draft
+    - changelog
+  outputs:
+    - review-comments
+  evidence:
+    - review-record
+constraints:
+  policies:
+    - release-communication-policy
+  prohibited_actions:
+    - approve-release
+    - deploy-to-production
+  allowed_actions:
+    - review-release-notes
+  confidentiality: internal
+  tool_use:
+    - docs-read
+decision_rights:
+  recipient_authority: analysis-only
+  approval_required: true
+  approval_role: release-manager
+governance:
+  profile_id: software-release-governance
+  profile_version: 0.1.0
+  risk_classification:
+    level: medium
+    rationale:
+      - customer-facing artifact
+  policy_refs:
+    - release-communication-policy
+  required_controls:
+    - release-review
+  approval_rules:
+    - production-release-approval
+  evidence_required:
+    - review-record
+  runtime_enforcement:
+    tool_calls: policy-checked
+    artifact_writes: policy-checked
+    production_actions: blocked
+    default_outcome: require-approval
+expected_output:
+  type: review-comments
+  format: markdown
+  acceptance_criteria:
+    - identifies missing release information
+    - does not approve deployment
+provenance:
+  created_by: context-packet-compiler
+  created_at: "2026-05-11T00:00:00Z"
+  source_artifacts:
+    - release-notes-draft
+    - changelog
+  governance_profile: software-release-governance

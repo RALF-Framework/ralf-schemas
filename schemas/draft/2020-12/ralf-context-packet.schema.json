@@ -57,6 +57,9 @@
     "decision_rights": {
       "$ref": "#/$defs/context_decision_rights"
     },
+    "governance": {
+      "$ref": "#/$defs/context_governance"
+    },
     "risks": {
       "type": "array",
       "items": {
@@ -158,18 +161,10 @@
           "$ref": "common.schema.json#/$defs/identifier"
         },
         "consulted": {
-          "type": "array",
-          "items": {
-            "$ref": "common.schema.json#/$defs/identifier"
-          },
-          "uniqueItems": true
+          "$ref": "common.schema.json#/$defs/identifier_list"
         },
         "informed": {
-          "type": "array",
-          "items": {
-            "$ref": "common.schema.json#/$defs/identifier"
-          },
-          "uniqueItems": true
+          "$ref": "common.schema.json#/$defs/identifier_list"
         }
       }
     },
@@ -178,25 +173,13 @@
       "additionalProperties": false,
       "properties": {
         "inputs": {
-          "type": "array",
-          "items": {
-            "$ref": "common.schema.json#/$defs/identifier"
-          },
-          "uniqueItems": true
+          "$ref": "common.schema.json#/$defs/identifier_list"
         },
         "outputs": {
-          "type": "array",
-          "items": {
-            "$ref": "common.schema.json#/$defs/identifier"
-          },
-          "uniqueItems": true
+          "$ref": "common.schema.json#/$defs/identifier_list"
         },
         "evidence": {
-          "type": "array",
-          "items": {
-            "$ref": "common.schema.json#/$defs/identifier"
-          },
-          "uniqueItems": true
+          "$ref": "common.schema.json#/$defs/identifier_list"
         }
       }
     },
@@ -205,35 +188,19 @@
       "additionalProperties": false,
       "properties": {
         "policies": {
-          "type": "array",
-          "items": {
-            "$ref": "common.schema.json#/$defs/identifier"
-          },
-          "uniqueItems": true
+          "$ref": "common.schema.json#/$defs/identifier_list"
         },
         "prohibited_actions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true
+          "$ref": "common.schema.json#/$defs/string_list"
         },
         "allowed_actions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true
+          "$ref": "common.schema.json#/$defs/string_list"
         },
         "confidentiality": {
           "$ref": "common.schema.json#/$defs/confidentiality"
         },
         "tool_use": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true
+          "$ref": "common.schema.json#/$defs/string_list"
         }
       }
     },
@@ -255,6 +222,57 @@
         },
         "notes": {
           "type": "string"
+        }
+      }
+    },
+    "context_governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile_id": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "profile_version": {
+          "$ref": "common.schema.json#/$defs/version"
+        },
+        "risk_classification": {
+          "$ref": "#/$defs/risk_classification"
+        },
+        "policy_refs": {
+          "$ref": "common.schema.json#/$defs/identifier_list"
+        },
+        "required_controls": {
+          "$ref": "common.schema.json#/$defs/identifier_list"
+        },
+        "approval_rules": {
+          "$ref": "common.schema.json#/$defs/identifier_list"
+        },
+        "evidence_required": {
+          "$ref": "common.schema.json#/$defs/identifier_list"
+        },
+        "runtime_enforcement": {
+          "$ref": "ralf-runtime-enforcement.schema.json"
+        },
+        "compliance_note": {
+          "type": "string"
+        }
+      }
+    },
+    "risk_classification": {
+      "type": "object",
+      "required": [
+        "level"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "$ref": "common.schema.json#/$defs/risk_level"
+        },
+        "rationale": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -313,11 +331,10 @@
           "$ref": "common.schema.json#/$defs/timestamp"
         },
         "source_artifacts": {
-          "type": "array",
-          "items": {
-            "$ref": "common.schema.json#/$defs/identifier"
-          },
-          "uniqueItems": true
+          "$ref": "common.schema.json#/$defs/identifier_list"
+        },
+        "governance_profile": {
+          "$ref": "common.schema.json#/$defs/identifier"
         },
         "transformations": {
           "type": "array",

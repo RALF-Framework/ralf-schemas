@@ -71,6 +71,12 @@
         "$ref": "ralf-policy.schema.json"
       }
     },
+    "governance_profiles": {
+      "type": "array",
+      "items": {
+        "$ref": "ralf-governance-profile.schema.json"
+      }
+    },
     "governance": {
       "$ref": "#/$defs/governance"
     },
@@ -105,6 +111,12 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "active_profile": {
+          "$ref": "common.schema.json#/$defs/identifier"
+        },
+        "default_risk_level": {
+          "$ref": "common.schema.json#/$defs/risk_level"
+        },
         "decision_model": {
           "type": "string"
         },
@@ -121,11 +133,13 @@
           "type": "boolean"
         },
         "policies": {
-          "type": "array",
-          "items": {
-            "$ref": "common.schema.json#/$defs/identifier"
-          },
-          "uniqueItems": true
+          "$ref": "common.schema.json#/$defs/identifier_list"
+        },
+        "controls": {
+          "$ref": "common.schema.json#/$defs/identifier_list"
+        },
+        "evidence_requirements": {
+          "$ref": "common.schema.json#/$defs/identifier_list"
         }
       }
     }

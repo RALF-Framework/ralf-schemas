@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ralf-framework.org/draft/2020-12/ralf-evidence-requirement.schema.json",
+  "title": "RALF Evidence Requirement",
+  "description": "A required proof object that must be produced, reviewed, retained, or linked.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "evidence_type"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "name": {
+      "$ref": "common.schema.json#/$defs/non_empty_string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "evidence_type": {
+      "type": "string",
+      "enum": [
+        "artifact",
+        "trace-record",
+        "approval-record",
+        "test-result",
+        "risk-review",
+        "policy-decision",
+        "log-entry",
+        "other"
+      ]
+    },
+    "artifact_type": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "responsible_role": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "required_for_controls": {
+      "$ref": "common.schema.json#/$defs/identifier_list"
+    },
+    "required_for_gates": {
+      "$ref": "common.schema.json#/$defs/identifier_list"
+    },
+    "retention": {
+      "type": "string"
+    },
+    "review_required": {
+      "type": "boolean"
+    },
+    "review_role": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "provenance_required": {
+      "type": "boolean"
+    },
+    "metadata": {
+      "$ref": "common.schema.json#/$defs/metadata"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extension_object"
+    }
+  }
+}

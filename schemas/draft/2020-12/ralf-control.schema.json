@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ralf-framework.org/draft/2020-12/ralf-control.schema.json",
+  "title": "RALF Control",
+  "description": "A governance requirement mapped to roles, phases, artifacts, tools, gates, or runtime actions.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "enforcement_level"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "name": {
+      "$ref": "common.schema.json#/$defs/non_empty_string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/external_reference"
+      }
+    },
+    "source_policies": {
+      "$ref": "common.schema.json#/$defs/identifier_list"
+    },
+    "enforcement_level": {
+      "$ref": "common.schema.json#/$defs/enforcement_level"
+    },
+    "applies_to": {
+      "$ref": "#/$defs/applies_to"
+    },
+    "required_evidence": {
+      "$ref": "common.schema.json#/$defs/identifier_list"
+    },
+    "related_gates": {
+      "$ref": "common.schema.json#/$defs/identifier_list"
+    },
+    "review_owner_role": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "implementation": {
+      "type": "string",
+      "enum": [
+        "manual",
+        "automated",
+        "hybrid"
+      ]
+    },
+    "metadata": {
+      "$ref": "common.schema.json#/$defs/metadata"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extension_object"
+    }
+  },
+  "$defs": {
+    "applies_to": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lifecycle_phases": {
+          "$ref": "common.schema.json#/$defs/identifier_list"
+        },
+        "roles": {
+          "$ref": "common.schema.json#/$defs/identifier_list"
+        },
+        "artifacts": {
+          "$ref": "common.schema.json#/$defs/identifier_list"
+        },
+        "tools": {
+          "$ref": "common.schema.json#/$defs/identifier_list"
+        },
+        "actions": {
+          "$ref": "common.schema.json#/$defs/string_list"
+        }
+      }
+    }
+  }
+}
